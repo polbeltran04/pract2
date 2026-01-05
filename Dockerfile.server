@@ -1,0 +1,13 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+COPY requirements-server.txt /app/requirements-server.txt
+RUN pip install --no-cache-dir -r requirements-server.txt
+
+COPY main-server.py /app/main-server.py
+
+ENV FLASK_APP=main-server.py
+EXPOSE 5000
+
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
